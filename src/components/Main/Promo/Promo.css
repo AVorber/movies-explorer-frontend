@@ -1,0 +1,19 @@
+.promo {
+  display: flex;
+  flex-direction: column;
+  background-color: #073042;
+  background-image: url('../../../images/promo-logo.svg');
+	background-repeat: no-repeat;
+	background-position: top 82px center;
+  margin: 0;
+}
+
+.promo__title {
+  font-weight: 400;
+  font-size: 50px;
+  line-height: 58px;
+  text-align: center;
+  letter-spacing: -0.04em;
+  color: white;
+  margin: 184px 275px 224px;
+}
