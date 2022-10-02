@@ -1,0 +1,80 @@
+.about-me {
+  display: flex;
+  flex-direction: column;
+  padding: 110px 70px 125px;
+}
+
+.about-me__title {
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 27px;
+  text-align: start;
+  letter-spacing: -0.04em;
+  padding-bottom: 23px;
+  border-bottom: solid 1px black;
+  margin: 0;
+}
+
+.about-me__container {
+  display: flex;
+  justify-content: space-between;
+  gap: 270px;
+  margin: 66px 0 0;
+}
+
+.about-me__info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.about-me__name {
+  font-weight: 400;
+  font-size: 50px;
+  line-height: 58px;
+  letter-spacing: -0.04em;
+  margin: 0;
+}
+
+.about-me__job {
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 20px;
+  margin: 18px 0 0;
+}
+
+.about-me__description {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 22px;
+  margin: 26px 0 0;
+}
+
+.about-me__links {
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+.about-me__links-item {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  color: black;
+  text-decoration: none;
+  margin: 0;
+  opacity: 1;
+  transition: opacity 0.3s ease-in;
+}
+
+.about-me__links-item:hover {
+  opacity: 0.7;
+}
+
+.about-me__avatar {
+  width: 270px;
+  height: 327px;
+  border-radius: 10px;
+  object-fit: cover;
+}

@@ -2,6 +2,7 @@ import React from 'react';
 import Promo from '../Main/Promo/Promo';
 import AboutProject from '../Main/AboutProject/AboutProject';
 import Techs from './Techs/Techs';
+import AboutMe from './AboutMe/AboutMe';
 import './Main.css';
 
 function Main() {
@@ -10,6 +11,7 @@ function Main() {
       <Promo />
       <AboutProject />
       <Techs />
+      <AboutMe />
     </main>
   );
 }
