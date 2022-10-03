@@ -4,13 +4,15 @@ import { Link } from 'react-router-dom';
 import Navigation from '../Navigation/Navigation';
 import './Header.css';
 
-function Header() {
+function Header({ loggedIn }) {
+  const headerClass = `header ${loggedIn ? 'header_logged-in' : ''}`;
+
   return (
-    <header className='header'>
+    <header className={headerClass}>
       <Link to='/'>
         <img className='header__logo' src={logo} alt='Логотип' />
       </Link>
-      <Navigation />
+      <Navigation loggedIn={loggedIn} />
     </header>
   );
 }
