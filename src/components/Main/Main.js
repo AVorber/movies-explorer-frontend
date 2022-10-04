@@ -11,7 +11,7 @@ function Main() {
   return (
     <>
       <Header loggedIn={false} />
-      <main className='content'>
+      <main className='main-content'>
         <Promo />
         <AboutProject />
         <Techs />

@@ -4,6 +4,7 @@ import Main from '../Main/Main';
 import NotFoundPage from '../NotFoundPage/NotFoundPage';
 import Register from '../Register/Register';
 import Login from '../Login/Login';
+import Movies from '../Movies/Movies';
 import './App.css';
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
         <Route exact path='/' element={<Main />} />
         <Route path='/sign-up' element={<Register />} />
         <Route path='/sign-in' element={<Login />} />
+        <Route path='/movies' element={<Movies />} />
         <Route path='*' element={<NotFoundPage />} />
       </Routes>
     </div>
