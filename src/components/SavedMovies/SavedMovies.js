@@ -11,7 +11,7 @@ function SavedMovies() {
   return (
     <>
       <Header loggedIn={true} />
-      <main className='movies-content'>
+      <main className='saved-movies-content'>
         <SearchForm />
         <MoviesCardList list_type={'saved-movies'} />
         <ButtonMoreCards />

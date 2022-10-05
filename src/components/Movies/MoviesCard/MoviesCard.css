@@ -68,3 +68,36 @@
   color: #A0A0A0;
   margin-top: 6px;
 }
+
+@media screen and (max-width: 768px) {
+  .card__image {
+    width: 339px;
+    height: 190px;
+  }
+
+  .card__info {
+    padding-bottom: 29px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .card__image {
+    max-width: 300px;
+    max-height: 168px;
+  }
+
+  .card__info {
+    margin: 15px 0 0;
+    padding-bottom: 29px;
+  }
+
+  .card__title {
+    font-size: 12px;
+    line-height: 15px;
+  }
+
+  .card__duration {
+    font-size: 10px;
+    line-height: 12px;
+  }
+}

@@ -103,3 +103,30 @@
   right: 5%;
   background-color: #f5f5f5;
 }
+
+@media screen and (max-width: 768px) {
+  .search {
+    flex-direction: column;
+    margin: 60px 0 0;
+    align-items: center;
+    gap: 37px;
+    padding-bottom: 43px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .search {
+    margin: 60px 0 0;
+    gap: 45px;
+    padding-bottom: 43px;
+  }
+
+  .search__form-input {
+    width: 90%;
+    font-size: 11px;
+  }
+
+  .search__checkbox-label {
+    font-size: 11px;
+  }
+}
