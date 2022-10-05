@@ -11,7 +11,7 @@ function Movies() {
       <Header loggedIn={true} />
       <main className='movies-content'>
         <SearchForm />
-        <MoviesCardList />
+        <MoviesCardList list_type={'movies'} />
         <ButtonMoreCards />
       </main>
       <Footer />

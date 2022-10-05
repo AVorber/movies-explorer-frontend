@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
-import { useLocation } from 'react-router-dom';
 import movie from '../../../images/movie.svg';
 import './MoviesCard.css';
 
-function MoviesCard() {
+function MoviesCard({ list_type }) {
   const [like, setLike] = useState(false);
-  const { path } = useLocation();
   const likeClass = `card__button ${like ? 'card__button_type_like-active' : 'card__button_type_like'}`;
 
   function handleLike() {
@@ -17,7 +15,7 @@ function MoviesCard() {
       <img className='card__image' alt='Фильм' src={movie} />
       <div className='card__info'>
         <h3 className='card__title'>В погоне за Бенкси</h3>
-        { path === '/saved-movies' ? (
+        { list_type === 'saved-movies' ? (
           <button
             className='card__button card__button_type_delete'
             aria-label='Лайк'

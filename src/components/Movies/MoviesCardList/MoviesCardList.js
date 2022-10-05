@@ -2,13 +2,13 @@ import React from 'react';
 import MoviesCard from '../MoviesCard/MoviesCard';
 import './MoviesCardList.css';
 
-function MoviesCardList() {
+function MoviesCardList({ list_type }) {
   return (
     <section className='cards' aria-label='Список фильмов'>
-      <MoviesCard />
-      <MoviesCard />
-      <MoviesCard />
-      <MoviesCard />
+      <MoviesCard list_type={list_type} />
+      <MoviesCard list_type={list_type} />
+      <MoviesCard list_type={list_type} />
+      <MoviesCard list_type={list_type} />
     </section>
   );
 }
