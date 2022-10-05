@@ -75,3 +75,26 @@
   width: 12px;
   height: 12px;
 }
+
+@media screen and (max-width: 768px) {
+  .menu {
+    gap: 14px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .menu {
+    gap: 14px;
+  }
+
+  .menu__link {
+    font-weight: 500;
+    font-size: 10px;
+    line-height: 16px;
+  }
+
+  .menu__link_button {
+    width: 54px;
+    height: 26px;
+  }
+}

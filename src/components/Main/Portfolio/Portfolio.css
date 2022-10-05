@@ -55,3 +55,43 @@
   line-height: 60px;
   margin: 0;
 }
+
+@media screen and (max-width: 768px) {
+  .portfolio {
+    margin: 90px 0 0;
+  }
+
+  .portfolio__link {
+    font-size: 28px;
+    line-height: 50px;
+  }
+
+  .portfolio__link-icon {
+    font-size: 27px;
+    line-height: 60px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .portfolio {
+    margin: 70px 0 0;
+  }
+
+  .portfolio__title {
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  .portfolio__links {
+    margin: 40px 0 0;
+  }
+
+  .portfolio__link {
+    font-size: 18px;
+    line-height: 28px;
+  }
+  .portfolio__link-icon {
+    font-size: 18px;
+    line-height: 28px;
+  }
+}

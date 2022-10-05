@@ -1,5 +1,5 @@
 import React from 'react';
-import photo from '../../../images/foto.jpg';
+import photo from '../../../images/foto.svg';
 import Portfolio from '../Portfolio/Portfolio';
 import './AboutMe.css';
 

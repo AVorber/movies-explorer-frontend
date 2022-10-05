@@ -4,7 +4,8 @@
   background-color: #073042;
   background-image: url('../../../images/promo-logo.svg');
 	background-repeat: no-repeat;
-	background-position: top 82px center;
+	background-position: center;
+  padding: 184px 275px 224px;
   margin: 0;
 }
 
@@ -15,5 +16,26 @@
   text-align: center;
   letter-spacing: -0.04em;
   color: white;
-  margin: 184px 275px 224px;
+}
+
+@media screen and (max-width: 768px) {
+  .promo {
+    padding: 326px 19px 342px;
+  }
+
+  .promo__title {
+    font-size: 31px;
+    line-height: 39px;
+  }
+}
+
+@media screen and (max-width: 330px) {
+  .promo {
+    padding: 207px 10px 246px;
+    background-image: url('../../../images/promo-logo-320.svg');
+  }
+  .promo__title {
+    font-size: 31px;
+    line-height: 39px;
+  }
 }
