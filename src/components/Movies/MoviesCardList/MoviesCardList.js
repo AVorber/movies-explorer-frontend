@@ -4,13 +4,11 @@ import './MoviesCardList.css';
 
 function MoviesCardList() {
   return (
-    <section className='cards'>
-      <ul className='cards__movie-list'>
-        <MoviesCard />
-        <MoviesCard />
-        <MoviesCard />
-        <MoviesCard />
-      </ul>
+    <section className='cards' aria-label='Список фильмов'>
+      <MoviesCard />
+      <MoviesCard />
+      <MoviesCard />
+      <MoviesCard />
     </section>
   );
 }
