@@ -1,17 +1,16 @@
 .card {
   display: flex;
   flex-direction: column;
+  width: 100%;
 }
 
 .card__image {
-  width: 270px;
-  height: 151px;
+  width: 100%;
   object-fit: cover;
 }
 
 .card__info {
   display: flex;
-  flex-direction: row;
   align-items: center;
   justify-content: space-between;
   margin: 14px 0 0;
@@ -70,22 +69,12 @@
 }
 
 @media screen and (max-width: 768px) {
-  .card__image {
-    width: 339px;
-    height: 190px;
-  }
-
   .card__info {
     padding-bottom: 29px;
   }
 }
 
 @media screen and (max-width: 320px) {
-  .card__image {
-    max-width: 300px;
-    max-height: 168px;
-  }
-
   .card__info {
     margin: 15px 0 0;
     padding-bottom: 29px;
