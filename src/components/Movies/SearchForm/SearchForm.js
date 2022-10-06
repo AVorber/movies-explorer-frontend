@@ -8,7 +8,7 @@ function SearchForm() {
       <div className='search__form-wrapper'>
         <form className='search__form'>
           <img
-            className='searchform__icon'
+            className='search__form-icon'
             src={searchIcon}
             alt='Поиск'
           />

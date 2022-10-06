@@ -23,7 +23,7 @@
   flex-direction: column;
   position: relative;
   align-items: center;
-  width: 75%;
+  width: 68%;
   min-height: 100vh;
   background: white;
   z-index: 0;
@@ -100,7 +100,7 @@
   box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034);
   margin: 0;
   position: absolute;
-  bottom: 92px;
+  bottom: 45px;
   padding: 0;
 }
 
