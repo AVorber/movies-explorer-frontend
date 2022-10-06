@@ -15,7 +15,6 @@
   height: 72px;
   border-radius: 9px;
   background: #F9F9F9;
-  padding: 0 30px 0 19px;
 }
 
 .search__form {
@@ -25,7 +24,7 @@
   box-sizing: border-box;
   align-items: center;
   justify-content: space-between;
-  margin: 0;
+  padding: 0 30px 0 19px;
   border-right: 1px solid #e8e8e8;
 }
 
@@ -46,7 +45,7 @@
 }
 
 .search__form-button {
-  width: 59px;
+  min-width: 59px;
   height: 34px;
   border: none;
   font-weight: 500;
@@ -58,10 +57,9 @@
   padding: 0;
   cursor: pointer;
   transition: opacity 0.3s ease-in;
-  margin-right: 30px;
 }
 
-.search__form__button:hover {
+.search__form-button:hover {
   opacity: 0.7;
 }
 
@@ -69,6 +67,7 @@
   display: flex;
   gap: 14px;
   align-items: center;
+  margin: 0 30px 0;
 }
 
 .search__checkbox-label {
@@ -125,21 +124,12 @@
     padding-bottom: 108px;
   }
 
-  .search__form-wrapper {
-    padding: 0;
-  }
-
-  .search__form-icon {
-    margin: 0 10px 0 19px;
-  }
-
-  .search__form-button {
-    margin-right: 19px;
+  .search__form {
+    padding: 0 19px 0;
   }
 
   .search__checkbox-container {
-    margin-left: 19px;
-    margin-right: 10px;
+    margin: 0 20px 0;
   }
 }
 
@@ -171,10 +161,6 @@
     margin-right: 0;
   }
 
-  .search__form-button {
-    margin-right: 0;
-  }
-
   .search__form-input {
     width: 90%;
     font-size: 14px;
@@ -187,8 +173,6 @@
 
 @media screen and (max-width: 320px) {
   .search {
-    margin: 75px 0 0;
-    gap: 45px;
     padding-bottom: 115px;
   }
 
