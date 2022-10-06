@@ -5,6 +5,13 @@
 }
 
 .menu_logged-in {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.menu__links-wrapper {
+  display: flex;
   gap: 20px;
 }
 
@@ -47,6 +54,10 @@
   color: black;
   background-color: #2be080;
   border-radius: 3px;
+}
+
+.menu__profile-button-wrapper {
+  display: flex;
 }
 
 .menu__profile-button {

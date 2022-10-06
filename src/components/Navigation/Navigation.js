@@ -23,16 +23,20 @@ function Navigation({loggedIn}) {
       ) : (
         <>
           <nav className='menu menu_logged-in'>
-            <NavLink to='/movies' className='menu__link menu__link_weigt_m menu__link_size_m' alt='Фильмы'>
-              Фильмы
-            </NavLink>
-            <NavLink to='/saved-movies' className='menu__link menu__link_size_m' alt='Сохранённые фильмы'>
-              Сохранённые фильмы
-            </NavLink>
-            <NavLink to='/profile' className='menu__profile-button' alt='Аккаунт'>
-              Аккаунт
-              <span className='menu__profile-icon' />
-            </NavLink>
+            <div className='menu__links-wrapper'>
+              <NavLink to='/movies' className='menu__link menu__link_weigt_m menu__link_size_m' alt='Фильмы'>
+                Фильмы
+              </NavLink>
+              <NavLink to='/saved-movies' className='menu__link menu__link_size_m' alt='Сохранённые фильмы'>
+                Сохранённые фильмы
+              </NavLink>
+            </div>
+            <div className='menu__profile-button-wrapper'>
+              <NavLink to='/profile' className='menu__profile-button' alt='Аккаунт'>
+                Аккаунт
+                <span className='menu__profile-icon' />
+              </NavLink>
+            </div>
           </nav>
           <div className='menu__burger'>
             <button className='menu__burger-button' aria-label='Бургер меню' type='button' onClick={handleOpenMenu} />

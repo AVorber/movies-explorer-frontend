@@ -8,6 +8,8 @@
 
 .header_logged-in {
   background-color: white;
+  justify-content: space-between;
+  gap: 44px;
 }
 
 .header__logo {
