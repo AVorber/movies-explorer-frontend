@@ -20,12 +20,7 @@
 
 @media screen and (max-width: 768px) {
   .promo {
-    padding: 326px 19px 342px;
-  }
-
-  .promo__title {
-    font-size: 31px;
-    line-height: 39px;
+    padding: 300px 19px 305px;
   }
 }
 
