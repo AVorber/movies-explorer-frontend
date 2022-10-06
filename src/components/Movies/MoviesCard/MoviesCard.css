@@ -1,7 +1,12 @@
 .card {
   display: flex;
   flex-direction: column;
+  position: relative;
+  border-radius: 10px;
+  overflow: auto;
   width: 100%;
+  background: #FDFDFD;
+  box-shadow: 0 16px 24px rgba(0, 0, 0, 0.05);
 }
 
 .card__image {
@@ -13,9 +18,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin: 14px 0 0;
-  padding-bottom: 25px;
-  border-bottom: 1px solid #e8e8e8;
+  margin: 13px 12px 0;
 }
 
 .card__title {
@@ -26,16 +29,18 @@
 }
 
 .card__button {
-  width: 24px;
-  height: 24px;
+  width: 16px;
+  height: 16px;
   border: none;
   border-radius: 50px;
-  background: #f5f5f5;
+  background: none;
   background-repeat: no-repeat;
-  background-position: center;
+  background-position: top 30% left 50%;
   cursor: pointer;
   opacity: 1;
   transition: opacity 0.3s ease-in;
+  padding: 0;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.09);
 }
 
 .card__button:hover {
@@ -65,7 +70,7 @@
   font-size: 11px;
   line-height: 13px;
   color: #A0A0A0;
-  margin-top: 6px;
+  margin: 12px 12px 14px;
 }
 
 @media screen and (max-width: 768px) {
