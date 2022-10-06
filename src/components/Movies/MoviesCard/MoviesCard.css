@@ -81,8 +81,8 @@
 
 @media screen and (max-width: 320px) {
   .card__info {
-    margin: 15px 0 0;
-    padding-bottom: 29px;
+    margin: 20px 12px 0;;
+    padding-bottom: 0;
   }
 
   .card__title {
