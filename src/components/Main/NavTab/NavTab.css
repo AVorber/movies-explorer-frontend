@@ -1,0 +1,34 @@
+.nav {
+  display: flex;
+  justify-content: center;
+  background-color: black;
+}
+
+.nav__links {
+  display: flex;
+  gap: 40px;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 16px;
+  margin: 24px 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+.nav__link {
+  color: white;
+  opacity: 1;
+  transition: opacity 0.3s ease-in;
+}
+
+.nav__link:hover {
+  opacity: 0.7;
+}
+
+@media screen and (max-width: 330px) {
+  .nav__links {
+    gap: 24px;
+    font-size: 11px;
+    line-height: 16px;
+  }
+}

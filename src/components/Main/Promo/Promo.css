@@ -1,0 +1,36 @@
+.promo {
+  display: flex;
+  flex-direction: column;
+  background-color: #073042;
+  background-image: url('../../../images/promo-logo.svg');
+	background-repeat: no-repeat;
+	background-position: center;
+  padding: 150px 275px 190px;
+  margin: 0;
+}
+
+.promo__title {
+  font-weight: 400;
+  font-size: 50px;
+  line-height: 58px;
+  text-align: center;
+  letter-spacing: -0.04em;
+  color: white;
+}
+
+@media screen and (max-width: 768px) {
+  .promo {
+    padding: 300px 19px 305px;
+  }
+}
+
+@media screen and (max-width: 330px) {
+  .promo {
+    padding: 185px 10px 190px;
+    background-image: url('../../../images/promo-logo-320.svg');
+  }
+  .promo__title {
+    font-size: 31px;
+    line-height: 39px;
+  }
+}
