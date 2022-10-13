@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import Header from '../Header/Header';
 import './Profile.css';
 
-function Profile() {
+function Profile({ onSignOut }) {
   return (
     <>
       <Header loggedIn={true} />
@@ -31,7 +31,7 @@ function Profile() {
           </fieldset>
           <button className='profile__edit-button' type='submit'>Редактировать</button>
         </form>
-        <Link to='/sign-in' className='profile__signout-link'>
+        <Link to='/signin' className='profile__signout-link' onClick={onSignOut}>
           Выйти из аккаунта
         </Link>
       </section>

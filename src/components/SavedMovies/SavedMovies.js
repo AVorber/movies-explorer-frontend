@@ -7,13 +7,13 @@ import ButtonMoreCards from '../Movies/ButtonMoreCards/ButtonMoreCards';
 import Footer from '../Footer/Footer';
 import './SavedMovies.css';
 
-function SavedMovies() {
+function SavedMovies({ loggedIn, movies }) {
   return (
     <>
-      <Header loggedIn={true} />
+      <Header loggedIn={loggedIn} />
       <main className='saved-movies-content'>
         <SearchForm />
-        <MoviesCardList list_type={'saved-movies'} />
+        <MoviesCardList list_type={'saved-movies'} movies={movies} />
         <ButtonMoreCards />
       </main>
       <Footer />

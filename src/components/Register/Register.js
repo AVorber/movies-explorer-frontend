@@ -1,9 +1,12 @@
 import React from 'react';
 import CredentialsForm from '../CredentialsForm/CredentialsForm';
 
-function Register() {
+function Register({ onRegister }) {
   return (
-    <CredentialsForm type={'register'} />
+    <CredentialsForm
+      type={'register'}
+      onRegister={onRegister}
+    />
   );
 }
 

@@ -3,8 +3,8 @@ import { NavLink } from 'react-router-dom';
 import BurgerMenu from './BurgerMenu/BurgerMenu';
 import './Navigation.css';
 
-function Navigation({loggedIn}) {
-    const [isOpen, setIsOpen] = React.useState(false);
+function Navigation({ loggedIn }) {
+  const [isOpen, setIsOpen] = React.useState(false);
 
   function handleOpenMenu() {
     setIsOpen(true);
@@ -13,10 +13,10 @@ function Navigation({loggedIn}) {
     <>
       { !loggedIn ? (
         <nav className='menu'>
-          <NavLink to='/sign-up' className='menu__link menu__link_weigt_m menu__link_color_white'  alt='Регистрация'>
+          <NavLink to='/signup' className='menu__link menu__link_weigt_m menu__link_color_white'  alt='Регистрация'>
             Регистрация
           </NavLink>
-          <NavLink to='/sign-in' className='menu__link menu__link_button menu__link_weigt_m' alt='Войти'>
+          <NavLink to='/signin' className='menu__link menu__link_button menu__link_weigt_m' alt='Войти'>
             Войти
           </NavLink>
         </nav>

@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import movie from '../../../images/movie.svg';
 import './MoviesCard.css';
 
-function MoviesCard({ list_type }) {
+function MoviesCard({ nameRU, image, trailerLink, duration, list_type }) {
   const [like, setLike] = useState(false);
   const likeClass = `card__button ${like ? 'card__button_type_like-active' : 'card__button_type_like'}`;
 
@@ -12,9 +11,16 @@ function MoviesCard({ list_type }) {
 
   return (
     <article className='card'>
-      <img className='card__image' alt='Фильм' src={movie} />
+      <a
+        className='card__trailer-link'
+        href={trailerLink}
+        target='_blank'
+        rel='noreferrer'
+      >
+        <img className='card__image' alt={nameRU} src={`https://api.nomoreparties.co${image.url}`} />
+      </a>
       <div className='card__info'>
-        <h3 className='card__title'>В погоне за Бенкси</h3>
+        <h3 className='card__title'>{nameRU}</h3>
         { list_type === 'saved-movies' ? (
           <button
             className='card__button card__button_type_delete'
@@ -29,7 +35,7 @@ function MoviesCard({ list_type }) {
           </button>
         )}
       </div>
-      <span className='card__duration'>1ч 42м</span>
+      <span className='card__duration'>{duration} мин</span>
     </article>
   );
 }

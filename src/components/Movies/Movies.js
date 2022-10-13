@@ -5,13 +5,13 @@ import ButtonMoreCards from './ButtonMoreCards/ButtonMoreCards';
 import Footer from '../Footer/Footer';
 import './Movies.css';
 
-function Movies() {
+function Movies({ loggedIn, movies }) {
   return (
     <>
-      <Header loggedIn={true} />
+      <Header loggedIn={loggedIn} />
       <main className='movies-content'>
         <SearchForm />
-        <MoviesCardList list_type={'movies'} />
+        <MoviesCardList list_type={'movies'} movies={movies} />
         <ButtonMoreCards />
       </main>
       <Footer />
