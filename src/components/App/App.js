@@ -19,32 +19,19 @@ function App() {
   const [movies, setMovies] = React.useState([]);
   const history = useHistory();
 
-  React.useEffect(() => {
-    if (loggedIn) {
-      Promise.all([mainApi.getUserInfo(), moviesApi.getMovies()])
-        .then(([userData, initialMovies]) => {
-          setCurrentUser({
-            _id: userData.data._id,
-            name: userData.data.name,
-            email: userData.data.email,
-          });
-          setMovies(initialMovies);
-        })
-        .catch(err => alert(err))
-    }
-  }, [loggedIn]);
-
   const handleValidateToken = React.useCallback(() => {
     const token = localStorage.getItem('jwt');
-    mainApi.validateToken(token)
-      .then(result => {
-        setLoggedIn(true);
-      })
-      .catch(err => {
-        alert(err);
-        localStorage.removeItem('jwt');
-        history.push('/signup');
-      })
+      mainApi.validateToken(token)
+        .then(result => {
+          setLoggedIn(true);
+          setCurrentUser(result.data);
+          history.push('/movies');
+        })
+        .catch(err => {
+          alert(err);
+          localStorage.removeItem('jwt');
+          history.push('/signup');
+        });
   }, [history]);
 
   React.useEffect(() => {
@@ -52,16 +39,16 @@ function App() {
     if (token) {
       handleValidateToken();
     }
-    }, [handleValidateToken])
+  }, [handleValidateToken]);
 
-  function handleRegister(name, email, password) {
+  function handleRegister({ name, email, password }) {
     mainApi.signup(name, email, password)
       .then(() => {
         history.push('/signin');
       })
       .catch(err => {
         alert(err);
-      })
+      });
     }
 
   function handleLogin({ email, password }) {
@@ -70,16 +57,16 @@ function App() {
         setLoggedIn(true);
         localStorage.setItem('jwt', result.token);
         handleValidateToken();
-        history.push('/movies');
       })
       .catch(err => {
         setLoggedIn(false);
-      })
+      });
   }
 
   function handleSignOut() {
     setLoggedIn(false);
     localStorage.removeItem('jwt');
+    setCurrentUser({});
     history.push('/signin');
   }
 
