@@ -14,32 +14,32 @@ import moviesApi from '../../utils/MoviesApi';
 import './App.css';
 
 function App() {
-  const [loggedIn, setLoggedIn] = React.useState(false);
+  const [loggedIn, setLoggedIn] = React.useState(localStorage.getItem('jwt'));
   const [currentUser, setCurrentUser] = React.useState({});
   const [movies, setMovies] = React.useState([]);
   const history = useHistory();
 
-  const handleValidateToken = React.useCallback(() => {
+  React.useEffect(() => {
+    if (loggedIn) {
+      handleValidateToken();
+    }
+  }, [loggedIn]);
+
+  function handleValidateToken() {
     const token = localStorage.getItem('jwt');
+    if (token) {
       mainApi.validateToken(token)
         .then(result => {
           setLoggedIn(true);
           setCurrentUser(result.data);
-          history.push('/movies');
         })
         .catch(err => {
           alert(err);
           localStorage.removeItem('jwt');
           history.push('/signup');
         });
-  }, [history]);
-
-  React.useEffect(() => {
-    const token = localStorage.getItem('jwt');
-    if (token) {
-      handleValidateToken();
     }
-  }, [handleValidateToken]);
+  }
 
   function handleRegister({ name, email, password }) {
     mainApi.signup(name, email, password)
@@ -56,10 +56,10 @@ function App() {
       .then(result => {
         setLoggedIn(true);
         localStorage.setItem('jwt', result.token);
-        handleValidateToken();
+        history.push('/movies');
       })
       .catch(err => {
-        setLoggedIn(false);
+        alert(err);
       });
   }
 
@@ -68,6 +68,14 @@ function App() {
     localStorage.removeItem('jwt');
     setCurrentUser({});
     history.push('/signin');
+  }
+
+  function handleUpdateUser({ name, email }) {
+    mainApi.editUserInfo(name, email)
+      .then(data => {
+        setCurrentUser(data);
+      })
+      .catch(err => alert(err))
   }
 
   return (
@@ -100,6 +108,7 @@ function App() {
             component={Profile}
             loggedIn={loggedIn}
             onSignOut={handleSignOut}
+            onUpdateUser={handleUpdateUser}
           />
           <Route path='*'>
             <NotFoundPage />

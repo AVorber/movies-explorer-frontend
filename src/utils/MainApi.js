@@ -68,10 +68,25 @@ class MainApi {
       })
         .then(response => this._validateResponse(response))
   }
+
+  editUserInfo(name, email) {
+    return fetch(`${this._baseUrl}/users/me`,
+      {
+        method: 'PATCH',
+        headers: this._headers,
+        credentials: 'include',
+        body: JSON.stringify({
+          name: name,
+          email: email,
+        })
+      })
+        .then(response => this._validateResponse(response))
+  }
 }
 
 const mainApi = new MainApi({
   baseUrl: 'https://api.arebrov.diploma.nomoredomains.sbs',
+  // baseUrl: 'http://localhost:3001',
   headers: {
     'Content-Type': 'application/json',
   },
