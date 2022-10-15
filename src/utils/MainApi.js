@@ -25,7 +25,7 @@ class MainApi {
         .then(response => this._validateResponse(response))
         .then((data) => {
       if (data.token) {
-        localStorage.setItem("jwt", data.token);
+        localStorage.setItem('jwt', data.token);
         return data;
       }
     })
@@ -46,7 +46,7 @@ class MainApi {
         .then(response => this._validateResponse(response))
   }
 
-  validateToken(token) {
+  getUserInfo(token) {
     return fetch(`${this._baseUrl}/users/me`,
       {
         method: 'GET',
@@ -54,16 +54,6 @@ class MainApi {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
         },
-        credentials: 'include',
-      })
-        .then(response => this._validateResponse(response))
-  }
-
-  getUserInfo() {
-    return fetch(`${this._baseUrl}/users/me`,
-      {
-        method: 'GET',
-        headers: this._headers,
         credentials: 'include',
       })
         .then(response => this._validateResponse(response))
@@ -82,11 +72,42 @@ class MainApi {
       })
         .then(response => this._validateResponse(response))
   }
+
+  getSavedMovies() {
+    return fetch(`${this._baseUrl}/movies`,
+      {
+        method: 'GET',
+        headers: this._headers,
+        credentials: 'include',
+      })
+        .then(response => this._validateResponse(response))
+  }
+
+  saveMovie(data) {
+    return fetch(`${this._baseUrl}/movies`,
+      {
+        method: 'POST',
+        headers: this._headers,
+        credentials: 'include',
+        body: JSON.stringify(data)
+      })
+        .then(response => this._validateResponse(response))
+  }
+
+  deleteMovie(movieId) {
+    return fetch(`${this._baseUrl}/movies/${movieId}`,
+      {
+        method: 'DELETE',
+        headers: this._headers,
+        credentials: 'include',
+      })
+        .then(response => this._validateResponse(response))
+  }
 }
 
 const mainApi = new MainApi({
-  baseUrl: 'https://api.arebrov.diploma.nomoredomains.sbs',
-  // baseUrl: 'http://localhost:3001',
+  // baseUrl: 'https://api.arebrov.diploma.nomoredomains.sbs',
+  baseUrl: 'http://localhost:3001',
   headers: {
     'Content-Type': 'application/json',
   },

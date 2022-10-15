@@ -17,18 +17,27 @@ function App() {
   const [loggedIn, setLoggedIn] = React.useState(localStorage.getItem('jwt'));
   const [currentUser, setCurrentUser] = React.useState({});
   const [movies, setMovies] = React.useState([]);
+  const [filteredMovies, setFilteredMovies] = React.useState(
+    JSON.parse(localStorage.getItem('filteredMovies')) || []
+  );
+  const [savedMovies, setSavedMovies] = React.useState([]);
   const history = useHistory();
 
   React.useEffect(() => {
     if (loggedIn) {
-      handleValidateToken();
+      Promise.all([moviesApi.getMovies(), mainApi.getSavedMovies()])
+        .then(([moviesData, savedMoviesData]) => {
+          setMovies(moviesData);
+          setSavedMovies(savedMoviesData);
+        })
+        .catch(err => alert(err))
     }
-  }, [loggedIn]);
+  }, [history, loggedIn]);
 
-  function handleValidateToken() {
+  React.useEffect(() => {
     const token = localStorage.getItem('jwt');
     if (token) {
-      mainApi.validateToken(token)
+      mainApi.getUserInfo(token)
         .then(result => {
           setLoggedIn(true);
           setCurrentUser(result.data);
@@ -39,7 +48,7 @@ function App() {
           history.push('/signup');
         });
     }
-  }
+  }, [loggedIn]);
 
   function handleRegister({ name, email, password }) {
     mainApi.signup(name, email, password)
@@ -66,16 +75,27 @@ function App() {
   function handleSignOut() {
     setLoggedIn(false);
     localStorage.removeItem('jwt');
+    localStorage.removeItem('searchString');
+    localStorage.removeItem('filteredMovies');
+    localStorage.removeItem('shortFilmsToggle');
     setCurrentUser({});
     history.push('/signin');
   }
 
   function handleUpdateUser({ name, email }) {
     mainApi.editUserInfo(name, email)
-      .then(data => {
-        setCurrentUser(data);
+      .then(result => {
+        setCurrentUser(result);
       })
       .catch(err => alert(err))
+  }
+
+  function handleSearchMovies() {
+    const searchString = localStorage.getItem('searchString');
+    const filteredMovies = movies.filter(item => item.nameRU.toLowerCase().includes(searchString.toLowerCase()));
+
+    localStorage.setItem('filteredMovies', JSON.stringify(filteredMovies));
+    setFilteredMovies(filteredMovies);
   }
 
   return (
@@ -95,7 +115,8 @@ function App() {
             path='/movies'
             component={Movies}
             loggedIn={loggedIn}
-            movies={movies}
+            movies={filteredMovies}
+            onSubmit={handleSearchMovies}
           />
           <ProtectedRoute
             path='/saved-movies'
@@ -108,7 +129,7 @@ function App() {
             component={Profile}
             loggedIn={loggedIn}
             onSignOut={handleSignOut}
-            onUpdateUser={handleUpdateUser}
+            onSubmit={handleUpdateUser}
           />
           <Route path='*'>
             <NotFoundPage />

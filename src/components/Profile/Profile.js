@@ -5,13 +5,13 @@ import './Profile.css';
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import {useFormWithValidation} from "../../utils/FormValidation";
 
-function Profile({ onSignOut, onUpdateUser }) {
+function Profile({ onSignOut, onSubmit }) {
   const currentUser = React.useContext(CurrentUserContext);
   const { values, handleChange, errors, isValid } = useFormWithValidation({});
 
   function handleSubmit(e) {
     e.preventDefault();
-    onUpdateUser(values);
+    onSubmit(values);
   }
 
   return (

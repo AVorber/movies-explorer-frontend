@@ -5,12 +5,12 @@ import ButtonMoreCards from './ButtonMoreCards/ButtonMoreCards';
 import Footer from '../Footer/Footer';
 import './Movies.css';
 
-function Movies({ loggedIn, movies }) {
+function Movies({ loggedIn, movies, onSubmit }) {
   return (
     <>
       <Header loggedIn={loggedIn} />
       <main className='movies-content'>
-        <SearchForm />
+        <SearchForm onSubmit={onSubmit} />
         <MoviesCardList list_type={'movies'} movies={movies} />
         <ButtonMoreCards />
       </main>
