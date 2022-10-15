@@ -11,6 +11,7 @@ import Profile from '../Profile/Profile';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import mainApi from '../../utils/MainApi';
 import moviesApi from '../../utils/MoviesApi';
+import { searchStringFilter } from '../../utils/MoviesFilters';
 import './App.css';
 
 function App() {
@@ -92,7 +93,7 @@ function App() {
 
   function handleSearchMovies() {
     const searchString = localStorage.getItem('searchString');
-    const filteredMovies = movies.filter(item => item.nameRU.toLowerCase().includes(searchString.toLowerCase()));
+    const filteredMovies = searchStringFilter(movies, searchString)
 
     localStorage.setItem('filteredMovies', JSON.stringify(filteredMovies));
     setFilteredMovies(filteredMovies);

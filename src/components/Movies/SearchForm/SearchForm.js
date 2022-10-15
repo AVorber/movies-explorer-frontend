@@ -2,9 +2,8 @@ import React from 'react';
 import searchIcon from '../../../images/search-icon.svg';
 import './SearchForm.css';
 
-function SearchForm({ onSubmit }) {
+function SearchForm({ onSubmit, onCheckboxChange, isShortMovie }) {
   const [searchString, setSearchString] = React.useState(localStorage.getItem('searchString') || '');
-  const [isChecked, setIsChecked] = React.useState(localStorage.getItem('shortFilmsToggle') === 'true');
 
   function handleChange(e) {
     setSearchString(e.target.value);
@@ -14,11 +13,6 @@ function SearchForm({ onSubmit }) {
     e.preventDefault();
     localStorage.setItem('searchString', searchString);
     onSubmit();
-  }
-
-  function handleCheckboxChange() {
-    setIsChecked(!isChecked);
-    localStorage.setItem('shortFilmsToggle', !isChecked);
   }
 
   return (
@@ -44,8 +38,8 @@ function SearchForm({ onSubmit }) {
           <input
             className='search__checkbox'
             type='checkbox'
-            checked={isChecked}
-            onClick={handleCheckboxChange}
+            checked={isShortMovie}
+            onClick={onCheckboxChange}
           />
           <span className='search__checkbox-label'>Короткометражки</span>
         </dev>

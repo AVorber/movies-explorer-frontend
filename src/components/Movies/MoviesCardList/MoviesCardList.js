@@ -1,8 +1,10 @@
 import React from 'react';
+import { useLocation } from 'react-router-dom';
 import MoviesCard from '../MoviesCard/MoviesCard';
 import './MoviesCardList.css';
 
 function MoviesCardList({ list_type, movies }) {
+  const location = useLocation();
   const [moreCards, setMoreCards] = React.useState(0);
   const [loadedCards, setLoadedCards] = React.useState(0);
 
@@ -44,10 +46,11 @@ function MoviesCardList({ list_type, movies }) {
           ))
         }
       </section>
-      { movies.length > loadedCards
-        ? <button className='cards__more-button' onClick={handleLoadMore}>Еще</button>
-        : <></>
-      }
+      { location.pathname !== '/saved-movies' && (
+        movies.length > loadedCards
+          ? <button className='cards__more-button' onClick={handleLoadMore}>Еще</button>
+          : <></>
+      )}
     </>
   );
 }
