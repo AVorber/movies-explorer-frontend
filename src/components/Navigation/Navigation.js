@@ -1,9 +1,10 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import BurgerMenu from './BurgerMenu/BurgerMenu';
 import './Navigation.css';
 
 function Navigation({ loggedIn }) {
+  const location = useLocation();
   const [isOpen, setIsOpen] = React.useState(false);
 
   function handleOpenMenu() {
@@ -24,10 +25,26 @@ function Navigation({ loggedIn }) {
         <>
           <nav className='menu menu_logged-in'>
             <div className='menu__links-wrapper'>
-              <NavLink to='/movies' className='menu__link menu__link_weigt_m menu__link_size_m' alt='Фильмы'>
+              <NavLink
+                to='/movies'
+                className={
+                  location.pathname === '/movies'
+                    ? 'menu__link menu__link_weigt_m menu__link_size_m'
+                    : 'menu__link menu__link_size_m'
+                }
+                alt='Фильмы'
+              >
                 Фильмы
               </NavLink>
-              <NavLink to='/saved-movies' className='menu__link menu__link_size_m' alt='Сохранённые фильмы'>
+              <NavLink
+                to='/saved-movies'
+                className={
+                  location.pathname === '/saved-movies'
+                    ? 'menu__link menu__link_weigt_m menu__link_size_m'
+                    : 'menu__link menu__link_size_m'
+                }
+                alt='Сохранённые фильмы'
+              >
                 Сохранённые фильмы
               </NavLink>
             </div>
