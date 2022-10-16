@@ -1,9 +1,11 @@
 import React from 'react';
+import { useLocation } from 'react-router-dom';
 import searchIcon from '../../../images/search-icon.svg';
 import './SearchForm.css';
 
-function SearchForm({ onSubmit, onCheckboxChange, isShortMovie }) {
-  const [searchString, setSearchString] = React.useState(localStorage.getItem('searchString') || '');
+function SearchForm({ text, onSubmit, onCheckboxChange, isShortMovie }) {
+  const location = useLocation();
+  const [searchString, setSearchString] = React.useState(text);
 
   function handleChange(e) {
     setSearchString(e.target.value);
@@ -11,8 +13,10 @@ function SearchForm({ onSubmit, onCheckboxChange, isShortMovie }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    localStorage.setItem('searchString', searchString);
-    onSubmit();
+    if (location.pathname === '/movies') {
+      localStorage.setItem('searchString', searchString);
+    }
+    onSubmit(searchString);
   }
 
   return (

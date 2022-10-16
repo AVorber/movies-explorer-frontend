@@ -18,7 +18,12 @@ function Movies({ loggedIn, movies, savedMovies, onSubmit, onMovieLike, onMovieD
     <>
       <Header loggedIn={loggedIn} />
       <main className='movies-content'>
-        <SearchForm onSubmit={onSubmit} onCheckboxChange={handleCheckboxChange} isShortMovie={isShortMovie} />
+        <SearchForm
+          text={localStorage.getItem('searchString')}
+          onSubmit={onSubmit}
+          onCheckboxChange={handleCheckboxChange}
+          isShortMovie={isShortMovie}
+        />
         <MoviesCardList
           movies={isShortMovie ? filterShortMovies(movies) : movies}
           savedMovies={savedMovies}

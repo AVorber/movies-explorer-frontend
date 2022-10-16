@@ -91,12 +91,16 @@ function App() {
       .catch(err => alert(err))
   }
 
-  function handleSearchMovies() {
-    const searchString = localStorage.getItem('searchString');
-    const filteredMovies = searchStringFilter(movies, searchString)
+  function handleSearchMovies(searchString) {
+    const filteredMovies = searchStringFilter(movies, searchString);
 
     localStorage.setItem('filteredMovies', JSON.stringify(filteredMovies));
     setFilteredMovies(filteredMovies);
+  }
+
+  function handleSearchSavedMovies(searchString) {
+    const filteredMovies = searchStringFilter(savedMovies, searchString)
+    setSavedMovies(filteredMovies);
   }
 
   function handleMovieLike(movie) {
@@ -144,7 +148,7 @@ function App() {
             loggedIn={loggedIn}
             movies={savedMovies}
             savedMovies={savedMovies}
-            onSubmit={handleSearchMovies}
+            onSubmit={handleSearchSavedMovies}
             onMovieLike={handleMovieLike}
             onMovieDelete={handleMovieDelete}
           />
