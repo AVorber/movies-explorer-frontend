@@ -16,7 +16,6 @@ class MoviesApi {
       {
         method: 'GET',
         headers: this._headers,
-        credentials: 'include',
       })
         .then(response => this._validateResponse(response))
   }

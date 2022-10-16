@@ -16,7 +16,6 @@ class MainApi {
       {
         method: 'POST',
         headers: this._headers,
-        credentials: 'include',
         body: JSON.stringify({
           email: email,
           password: password,
@@ -36,7 +35,6 @@ class MainApi {
       {
         method: 'POST',
         headers: this._headers,
-        credentials: 'include',
         body: JSON.stringify({
           name: name,
           email: email,
@@ -54,7 +52,6 @@ class MainApi {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
         },
-        credentials: 'include',
       })
         .then(response => this._validateResponse(response))
   }
@@ -64,7 +61,6 @@ class MainApi {
       {
         method: 'PATCH',
         headers: this._headers,
-        credentials: 'include',
         body: JSON.stringify({
           name: name,
           email: email,
@@ -78,7 +74,6 @@ class MainApi {
       {
         method: 'GET',
         headers: this._headers,
-        credentials: 'include',
       })
         .then(response => this._validateResponse(response))
   }
@@ -88,7 +83,6 @@ class MainApi {
       {
         method: 'POST',
         headers: this._headers,
-        credentials: 'include',
         body: JSON.stringify(data)
       })
         .then(response => this._validateResponse(response))
@@ -99,15 +93,13 @@ class MainApi {
       {
         method: 'DELETE',
         headers: this._headers,
-        credentials: 'include',
       })
         .then(response => this._validateResponse(response))
   }
 }
 
 const mainApi = new MainApi({
-  // baseUrl: 'https://api.arebrov.diploma.nomoredomains.sbs',
-  baseUrl: 'http://localhost:3001',
+  baseUrl: 'https://api.arebrov.diploma.nomoredomains.sbs',
   headers: {
     'Content-Type': 'application/json',
   },
