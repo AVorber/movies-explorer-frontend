@@ -6,13 +6,17 @@ import MoviesCardList from '../Movies/MoviesCardList/MoviesCardList';
 import Footer from '../Footer/Footer';
 import './SavedMovies.css';
 
-function SavedMovies({ loggedIn, movies }) {
+function SavedMovies({ loggedIn, movies, savedMovies, onMovieDelete }) {
   return (
     <>
       <Header loggedIn={loggedIn} />
       <main className='saved-movies-content'>
         <SearchForm />
-        <MoviesCardList list_type={'saved-movies'} movies={movies} />
+        <MoviesCardList
+          movies={movies}
+          savedMovies={savedMovies}
+          onMovieDelete={onMovieDelete}
+        />
       </main>
       <Footer />
     </>

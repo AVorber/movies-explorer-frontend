@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 import MoviesCard from '../MoviesCard/MoviesCard';
 import './MoviesCardList.css';
 
-function MoviesCardList({ list_type, movies }) {
+function MoviesCardList({ movies, savedMovies, onMovieLike, onMovieDelete }) {
   const location = useLocation();
   const [moreCards, setMoreCards] = React.useState(0);
   const [loadedCards, setLoadedCards] = React.useState(0);
@@ -33,15 +33,24 @@ function MoviesCardList({ list_type, movies }) {
     return () => window.removeEventListener('resize', updateSize);
   }, []);
 
+  const displayMovies = movies => {
+    if (location.pathname === '/movies') {
+      return movies.slice(0, loadedCards);
+    }
+    return movies;
+  };
+
   return (
     <>
       <section className='cards' aria-label='Список фильмов'>
         {
-          movies.slice(0, loadedCards).map(movie => (
+          displayMovies(location.pathname === '/movies' ? movies : savedMovies).map(movie => (
             <MoviesCard
-              {...movie}
               key={movie.id}
-              list_type={list_type}
+              movie={movie}
+              savedMovies={savedMovies}
+              onMovieLike={onMovieLike}
+              onMovieDelete={onMovieDelete}
             />
           ))
         }

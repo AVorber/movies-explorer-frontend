@@ -6,7 +6,7 @@ import Footer from '../Footer/Footer';
 import { filterShortMovies } from '../../utils/MoviesFilters';
 import './Movies.css';
 
-function Movies({ loggedIn, movies, onSubmit }) {
+function Movies({ loggedIn, movies, savedMovies, onSubmit, onMovieLike, onMovieDelete }) {
   const [isShortMovie, setIsShortMovie] = React.useState(localStorage.getItem('shortFilmsToggle'));
 
   function handleCheckboxChange() {
@@ -19,7 +19,12 @@ function Movies({ loggedIn, movies, onSubmit }) {
       <Header loggedIn={loggedIn} />
       <main className='movies-content'>
         <SearchForm onSubmit={onSubmit} onCheckboxChange={handleCheckboxChange} isShortMovie={isShortMovie} />
-        <MoviesCardList list_type={'movies'} movies={isShortMovie ? filterShortMovies(movies) : movies} />
+        <MoviesCardList
+          movies={isShortMovie ? filterShortMovies(movies) : movies}
+          savedMovies={savedMovies}
+          onMovieLike={onMovieLike}
+          onMovieDelete={onMovieDelete}
+        />
       </main>
       <Footer />
     </>

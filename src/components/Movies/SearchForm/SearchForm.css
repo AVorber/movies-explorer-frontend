@@ -42,6 +42,7 @@
   margin: 0;
   border: none;
   background: #F9F9F9;
+  outline: none;
 }
 
 .search__form-button {

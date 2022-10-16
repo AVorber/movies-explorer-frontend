@@ -54,7 +54,7 @@ function App() {
   function handleRegister({ name, email, password }) {
     mainApi.signup(name, email, password)
       .then(() => {
-        history.push('/signin');
+        handleLogin({ email, password });
       })
       .catch(err => {
         alert(err);
@@ -99,6 +99,22 @@ function App() {
     setFilteredMovies(filteredMovies);
   }
 
+  function handleMovieLike(movie) {
+    mainApi.saveMovie(movie)
+      .then(() => {
+        setMovies(movies => movies.filter(item => item.id !== movie.id));
+      })
+      .catch(err => alert(err))
+  }
+
+  function handleMovieDelete(movieId) {
+    mainApi.deleteMovie(movieId)
+      .then(() => {
+        setSavedMovies(savedMovies => savedMovies.filter(item => item._id !== movieId))
+      })
+      .catch(err => alert(err))
+  }
+
   return (
     <div className='page'>
       <CurrentUserContext.Provider value={currentUser}>
@@ -117,13 +133,20 @@ function App() {
             component={Movies}
             loggedIn={loggedIn}
             movies={filteredMovies}
+            savedMovies={savedMovies}
             onSubmit={handleSearchMovies}
+            onMovieLike={handleMovieLike}
+            onMovieDelete={handleMovieDelete}
           />
           <ProtectedRoute
             path='/saved-movies'
             component={SavedMovies}
             loggedIn={loggedIn}
-            movies={movies}
+            movies={savedMovies}
+            savedMovies={savedMovies}
+            onSubmit={handleSearchMovies}
+            onMovieLike={handleMovieLike}
+            onMovieDelete={handleMovieDelete}
           />
           <ProtectedRoute
             path='/profile'
