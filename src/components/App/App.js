@@ -22,17 +22,22 @@ function App() {
     JSON.parse(localStorage.getItem('filteredMovies')) || []
   );
   const [savedMovies, setSavedMovies] = React.useState([]);
+  const [isLoading, setIsLoading] = React.useState(true);
   const history = useHistory();
 
   React.useEffect(() => {
-    if (loggedIn) {
+    setIsLoading(true);
+    setTimeout(() => {
+      if (loggedIn) {
       Promise.all([moviesApi.getMovies(), mainApi.getSavedMovies()])
         .then(([moviesData, savedMoviesData]) => {
           setMovies(moviesData);
           setSavedMovies(savedMoviesData);
+          setIsLoading(false);
         })
         .catch(err => alert(err))
-    }
+      }
+    },500);
   }, [history, loggedIn]);
 
   React.useEffect(() => {
@@ -92,15 +97,20 @@ function App() {
   }
 
   function handleSearchMovies(searchString) {
-    const filteredMovies = searchStringFilter(movies, searchString);
-
-    localStorage.setItem('filteredMovies', JSON.stringify(filteredMovies));
-    setFilteredMovies(filteredMovies);
+    setTimeout(() => {
+      setIsLoading(false);
+      const filteredMovies = searchStringFilter(movies, searchString);
+      localStorage.setItem('filteredMovies', JSON.stringify(filteredMovies));
+      setFilteredMovies(filteredMovies);
+    }, 500);
   }
 
   function handleSearchSavedMovies(searchString) {
-    const filteredMovies = searchStringFilter(savedMovies, searchString)
-    setSavedMovies(filteredMovies);
+    setTimeout(() => {
+      setIsLoading(false);
+      const filteredMovies = searchStringFilter(savedMovies, searchString)
+      setSavedMovies(filteredMovies);
+    }, 500);
   }
 
   function handleMovieLike(movie) {
@@ -141,6 +151,7 @@ function App() {
             onSubmit={handleSearchMovies}
             onMovieLike={handleMovieLike}
             onMovieDelete={handleMovieDelete}
+            isLoading={isLoading}
           />
           <ProtectedRoute
             path='/saved-movies'

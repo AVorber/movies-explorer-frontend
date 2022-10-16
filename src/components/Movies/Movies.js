@@ -3,10 +3,11 @@ import Header from '../Header/Header';
 import SearchForm from './SearchForm/SearchForm';
 import MoviesCardList from './MoviesCardList/MoviesCardList';
 import Footer from '../Footer/Footer';
+import Preloader from '../Preloader/Preloader';
 import { filterShortMovies } from '../../utils/MoviesFilters';
 import './Movies.css';
 
-function Movies({ loggedIn, movies, savedMovies, onSubmit, onMovieLike, onMovieDelete }) {
+function Movies({ loggedIn, movies, savedMovies, onSubmit, onMovieLike, onMovieDelete, isLoading }) {
   const [isShortMovie, setIsShortMovie] = React.useState(localStorage.getItem('shortFilmsToggle'));
 
   function handleCheckboxChange() {
@@ -24,12 +25,18 @@ function Movies({ loggedIn, movies, savedMovies, onSubmit, onMovieLike, onMovieD
           onCheckboxChange={handleCheckboxChange}
           isShortMovie={isShortMovie}
         />
-        <MoviesCardList
-          movies={isShortMovie ? filterShortMovies(movies) : movies}
-          savedMovies={savedMovies}
-          onMovieLike={onMovieLike}
-          onMovieDelete={onMovieDelete}
-        />
+        {
+          isLoading ? (
+            <Preloader />
+          ) : (
+            <MoviesCardList
+              movies={isShortMovie ? filterShortMovies(movies) : movies}
+              savedMovies={savedMovies}
+              onMovieLike={onMovieLike}
+              onMovieDelete={onMovieDelete}
+            />
+          )
+        }
       </main>
       <Footer />
     </>
