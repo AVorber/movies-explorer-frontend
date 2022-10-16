@@ -8,12 +8,21 @@ import { filterShortMovies } from '../../utils/MoviesFilters';
 import './Movies.css';
 
 function Movies({ loggedIn, movies, savedMovies, onSubmit, onMovieLike, onMovieDelete, isLoading }) {
-  const [isShortMovie, setIsShortMovie] = React.useState(localStorage.getItem('shortFilmsToggle'));
+  const [isShortMovie, setIsShortMovie] = React.useState(false);
 
   function handleCheckboxChange() {
+    localStorage.setItem('shortFilmsToggle', isShortMovie ? "no" : "yes");
     setIsShortMovie(!isShortMovie);
-    localStorage.setItem('shortFilmsToggle', !isShortMovie);
   }
+
+  React.useEffect(() => {
+    const checkboxValue = localStorage.getItem('shortFilmsToggle');
+    if (checkboxValue === "yes") {
+      setIsShortMovie(true);
+    } else {
+      setIsShortMovie(false);
+    }
+  }, []);
 
   return (
     <>

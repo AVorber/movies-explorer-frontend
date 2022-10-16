@@ -5,9 +5,16 @@ import SearchForm from '../Movies/SearchForm/SearchForm';
 import MoviesCardList from '../Movies/MoviesCardList/MoviesCardList';
 import Footer from '../Footer/Footer';
 import Preloader from '../Preloader/Preloader';
+import { filterShortMovies } from '../../utils/MoviesFilters';
 import './SavedMovies.css';
 
 function SavedMovies({ loggedIn, movies, savedMovies, onSubmit, onMovieDelete, isLoading }) {
+  const [isShortMovie, setIsShortMovie] = React.useState(false);
+
+  function handleCheckboxChange() {
+    setIsShortMovie(!isShortMovie);
+  }
+
   return (
     <>
       <Header loggedIn={loggedIn} />
@@ -15,6 +22,8 @@ function SavedMovies({ loggedIn, movies, savedMovies, onSubmit, onMovieDelete, i
         <SearchForm
           text=''
           onSubmit={onSubmit}
+          onCheckboxChange={handleCheckboxChange}
+          isShortMovie={isShortMovie}
         />
         {
           isLoading ? (
@@ -22,7 +31,7 @@ function SavedMovies({ loggedIn, movies, savedMovies, onSubmit, onMovieDelete, i
           ) : (
             <MoviesCardList
               movies={movies}
-              savedMovies={savedMovies}
+              savedMovies={isShortMovie ? filterShortMovies(savedMovies) : savedMovies}
               onMovieDelete={onMovieDelete}
             />
           )
