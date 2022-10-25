@@ -4,3 +4,5 @@
 
 Этап 4: Функциональность на «React» и JS
 https://github.com/AVorber/movies-explorer-frontend/pull/2
+
+Фронтенд: https://arebrov.diploma.nomoredomains.icu/

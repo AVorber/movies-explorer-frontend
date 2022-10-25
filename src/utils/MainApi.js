@@ -1,7 +1,6 @@
 class MainApi {
   constructor(options) {
     this._baseUrl = options.baseUrl;
-    this._headers = options.headers;
   }
 
   _validateResponse(response) {
@@ -15,7 +14,9 @@ class MainApi {
     return fetch(`${this._baseUrl}/signin`,
       {
         method: 'POST',
-        headers: this._headers,
+        headers: {
+          'Content-Type': 'application/json',
+        },
         body: JSON.stringify({
           email: email,
           password: password,
@@ -34,7 +35,9 @@ class MainApi {
     return fetch(`${this._baseUrl}/signup`,
       {
         method: 'POST',
-        headers: this._headers,
+        headers: {
+          'Content-Type': 'application/json',
+        },
         body: JSON.stringify({
           name: name,
           email: email,
@@ -56,11 +59,14 @@ class MainApi {
         .then(response => this._validateResponse(response))
   }
 
-  editUserInfo(name, email) {
+  editUserInfo(name, email, token) {
     return fetch(`${this._baseUrl}/users/me`,
       {
         method: 'PATCH',
-        headers: this._headers,
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
         body: JSON.stringify({
           name: name,
           email: email,
@@ -69,30 +75,39 @@ class MainApi {
         .then(response => this._validateResponse(response))
   }
 
-  getSavedMovies() {
+  getSavedMovies(token) {
     return fetch(`${this._baseUrl}/movies`,
       {
         method: 'GET',
-        headers: this._headers,
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
       })
         .then(response => this._validateResponse(response))
   }
 
-  saveMovie(data) {
+  saveMovie(data, token) {
     return fetch(`${this._baseUrl}/movies`,
       {
         method: 'POST',
-        headers: this._headers,
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
         body: JSON.stringify(data)
       })
         .then(response => this._validateResponse(response))
   }
 
-  deleteMovie(movieId) {
+  deleteMovie(movieId, token) {
     return fetch(`${this._baseUrl}/movies/${movieId}`,
       {
         method: 'DELETE',
-        headers: this._headers,
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
       })
         .then(response => this._validateResponse(response))
   }
@@ -100,9 +115,6 @@ class MainApi {
 
 const mainApi = new MainApi({
   baseUrl: 'https://api.arebrov.diploma.nomoredomains.sbs',
-  headers: {
-    'Content-Type': 'application/json',
-  },
 });
 
 export default mainApi;

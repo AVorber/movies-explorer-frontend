@@ -27,9 +27,10 @@ function App() {
 
   React.useEffect(() => {
     setIsLoading(true);
+    const token = localStorage.getItem('jwt');
     setTimeout(() => {
       if (loggedIn) {
-      Promise.all([moviesApi.getMovies(), mainApi.getSavedMovies()])
+      Promise.all([moviesApi.getMovies(), mainApi.getSavedMovies(token)])
         .then(([moviesData, savedMoviesData]) => {
           setMovies(moviesData);
           setSavedMovies(savedMoviesData);
@@ -89,7 +90,8 @@ function App() {
   }
 
   function handleUpdateUser({ name, email }) {
-    mainApi.editUserInfo(name, email)
+    const token = localStorage.getItem('jwt');
+    mainApi.editUserInfo(name, email, token)
       .then(result => {
         setCurrentUser(result);
       })
@@ -114,7 +116,8 @@ function App() {
   }
 
   function handleMovieLike(movie) {
-    mainApi.saveMovie(movie)
+    const token = localStorage.getItem('jwt');
+    mainApi.saveMovie(movie, token)
       .then(() => {
         setMovies(movies => movies.filter(item => item.id !== movie.id));
       })
@@ -122,7 +125,8 @@ function App() {
   }
 
   function handleMovieDelete(movieId) {
-    mainApi.deleteMovie(movieId)
+    const token = localStorage.getItem('jwt');
+    mainApi.deleteMovie(movieId, token)
       .then(() => {
         setSavedMovies(savedMovies => savedMovies.filter(item => item._id !== movieId))
       })
