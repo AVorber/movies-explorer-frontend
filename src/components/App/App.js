@@ -141,8 +141,12 @@ function App() {
     mainApi.saveMovie(movie, token)
       .then(() => {
         setMovies(movies => movies.filter(item => item.id !== movie.id));
+      })
+      .catch(err => alert(err))
+    mainApi.getSavedMovies(token)
+      .then(result => {
+        setSavedMovies(result);
         localStorage.setItem('savedMovies', JSON.stringify(savedMovies));
-        savedMovies.push(movie);
       })
       .catch(err => alert(err))
   }
