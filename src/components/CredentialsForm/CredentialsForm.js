@@ -56,6 +56,7 @@ function CredentialsForm({ type, onRegister, onLogin }) {
               maxLength='30'
               required
               value={values.email}
+              pattern='^[a-zA-Z0-9_.+]+(?<!^[0-9]*)@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$'
               onChange={handleChange}
             />
             <span className='credentials__input-error'>{errors.email}</span>

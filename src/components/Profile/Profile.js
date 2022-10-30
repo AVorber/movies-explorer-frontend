@@ -54,6 +54,7 @@ function Profile({ onSignOut, onSubmit }) {
               maxLength='30'
               placeholder='E-mail'
               value={values.email}
+              pattern='^[a-zA-Z0-9_.+]+(?<!^[0-9]*)@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$'
               onChange={handleChange}
               required
             />
