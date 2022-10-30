@@ -21,7 +21,9 @@ function App() {
   const [filteredMovies, setFilteredMovies] = React.useState(
     JSON.parse(localStorage.getItem('filteredMovies')) || []
   );
-  const [savedMovies, setSavedMovies] = React.useState([]);
+  const [savedMovies, setSavedMovies] = React.useState(
+    JSON.parse(localStorage.getItem('savedMovies')) || []
+  );
   const [isLoading, setIsLoading] = React.useState(true);
   const history = useHistory();
 
@@ -79,12 +81,19 @@ function App() {
   }
 
   function handleSignOut() {
-    setLoggedIn(false);
     localStorage.removeItem('jwt');
     localStorage.removeItem('searchString');
     localStorage.removeItem('filteredMovies');
+    localStorage.removeItem('savedMovies');
     localStorage.removeItem('shortFilmsToggle');
+    localStorage.removeItem('query');
+    localStorage.removeItem('loggedIn');
+    localStorage.removeItem('isShort');
+    setLoggedIn(false);
     setCurrentUser({});
+    setMovies([]);
+    setFilteredMovies([]);
+    setSavedMovies([]);
     history.push('/signin');
   }
 
@@ -132,6 +141,8 @@ function App() {
     mainApi.saveMovie(movie, token)
       .then(() => {
         setMovies(movies => movies.filter(item => item.id !== movie.id));
+        localStorage.setItem('savedMovies', JSON.stringify(savedMovies));
+        savedMovies.push(movie);
       })
       .catch(err => alert(err))
   }
