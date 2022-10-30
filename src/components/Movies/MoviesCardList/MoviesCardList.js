@@ -1,6 +1,17 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 import MoviesCard from '../MoviesCard/MoviesCard';
+import {
+  additionalCardsMax,
+  additionalCardsMidle,
+  additionalCardsMin,
+  largeScreen,
+  midleScreen,
+  smallScreen,
+  startLoadedCardsMax,
+  startLoadedCardsMidle,
+  startLoadedCardsMin,
+} from '../../../utils/constants';
 import './MoviesCardList.css';
 
 function MoviesCardList({ movies, savedMovies, onMovieLike, onMovieDelete }) {
@@ -14,18 +25,18 @@ function MoviesCardList({ movies, savedMovies, onMovieLike, onMovieDelete }) {
 
   React.useLayoutEffect(() => {
     function updateSize() {
-      if (window.innerWidth < 604) {
-        setLoadedCards(5);
-        setMoreCards(2);
-      } else if (window.innerWidth <= 944) {
-        setLoadedCards(8);
-        setMoreCards(2);
-      } else if (window.innerWidth < 1280) {
-        setLoadedCards(12);
-        setMoreCards(3);
-      } else if (window.innerWidth > 1280) {
-        setLoadedCards(12);
-        setMoreCards(4);
+      if (window.innerWidth < smallScreen) {
+        setLoadedCards(startLoadedCardsMin);
+        setMoreCards(additionalCardsMin);
+      } else if (window.innerWidth <= midleScreen) {
+        setLoadedCards(startLoadedCardsMidle);
+        setMoreCards(additionalCardsMin);
+      } else if (window.innerWidth < largeScreen) {
+        setLoadedCards(startLoadedCardsMax);
+        setMoreCards(additionalCardsMidle);
+      } else if (window.innerWidth > largeScreen) {
+        setLoadedCards(startLoadedCardsMax);
+        setMoreCards(additionalCardsMax);
       }
     }
     window.addEventListener('resize', updateSize);
