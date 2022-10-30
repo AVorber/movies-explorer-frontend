@@ -26,6 +26,10 @@ function App() {
   const history = useHistory();
 
   React.useEffect(() => {
+    validateToken();
+  }, []);
+
+  React.useEffect(() => {
     setIsLoading(true);
     const token = localStorage.getItem('jwt');
     setTimeout(() => {
@@ -41,21 +45,14 @@ function App() {
     },500);
   }, [history, loggedIn]);
 
-  React.useEffect(() => {
+  function validateToken() {
     const token = localStorage.getItem('jwt');
     if (token) {
-      mainApi.getUserInfo(token)
-        .then(result => {
-          setLoggedIn(true);
-          setCurrentUser(result.data);
-        })
-        .catch(err => {
-          alert(err);
-          localStorage.removeItem('jwt');
-          history.push('/signup');
-        });
+      getUserInfo(token);
+    } else {
+      handleSignOut();
     }
-  }, [loggedIn]);
+  }
 
   function handleRegister({ name, email, password }) {
     mainApi.signup(name, email, password)
@@ -70,8 +67,10 @@ function App() {
   function handleLogin({ email, password }) {
     mainApi.signin(email, password)
       .then(result => {
+        const token = result.token;
         setLoggedIn(true);
-        localStorage.setItem('jwt', result.token);
+        localStorage.setItem('jwt', token);
+        getUserInfo(token);
         history.push('/movies');
       })
       .catch(err => {
@@ -87,6 +86,19 @@ function App() {
     localStorage.removeItem('shortFilmsToggle');
     setCurrentUser({});
     history.push('/signin');
+  }
+
+  function getUserInfo(token) {
+    mainApi.getUserInfo(token)
+      .then(result => {
+        setCurrentUser(result.data);
+        setLoggedIn(true);
+      })
+      .catch(err => {
+        alert(err);
+        localStorage.removeItem('jwt');
+        history.push('/signup');
+      });
   }
 
   function handleUpdateUser({ name, email }) {

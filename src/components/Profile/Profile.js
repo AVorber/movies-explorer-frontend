@@ -7,7 +7,13 @@ import {useFormWithValidation} from "../../utils/FormValidation";
 
 function Profile({ onSignOut, onSubmit }) {
   const currentUser = React.useContext(CurrentUserContext);
-  const { values, handleChange, errors, isValid } = useFormWithValidation({});
+
+  const { values, handleChange, errors, isValid } = useFormWithValidation(
+    {
+      name: currentUser.name,
+      email: currentUser.email,
+    }
+  );
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -29,7 +35,7 @@ function Profile({ onSignOut, onSubmit }) {
               type='text'
               minLength='2'
               maxLength='30'
-              placeholder={currentUser.name}
+              placeholder='Имя'
               value={values.name}
               pattern='^[A-Za-zА-Яа-я -]+$'
               onChange={handleChange}
@@ -46,7 +52,7 @@ function Profile({ onSignOut, onSubmit }) {
               type='email'
               minLength='2'
               maxLength='30'
-              placeholder={currentUser.email}
+              placeholder='E-mail'
               value={values.email}
               onChange={handleChange}
               required
