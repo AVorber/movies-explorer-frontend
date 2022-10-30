@@ -1,19 +1,29 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../Header/Header';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+import {useFormWithValidation} from '../../utils/FormValidation';
 import './Profile.css';
-import { CurrentUserContext } from "../../contexts/CurrentUserContext";
-import {useFormWithValidation} from "../../utils/FormValidation";
 
 function Profile({ onSignOut, onSubmit }) {
   const currentUser = React.useContext(CurrentUserContext);
 
-  const { values, handleChange, errors, isValid } = useFormWithValidation(
+  const { values, handleChange, errors, isValid, setIsValid } = useFormWithValidation(
     {
       name: currentUser.name,
       email: currentUser.email,
     }
   );
+
+  React.useEffect(() => {
+    const isNameChanged = values.name !== currentUser.name;
+    const isEmailChanged = values.email !== currentUser.email;
+    if (isNameChanged || isEmailChanged) {
+      setIsValid(true);
+    } else {
+      setIsValid(false);
+    }
+  }, [values]);
 
   function handleSubmit(e) {
     e.preventDefault();
