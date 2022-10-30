@@ -5,7 +5,12 @@ import { useFormWithValidation } from '../../utils/FormValidation';
 import './CredentialsForm.css';
 
 function CredentialsForm({ type, onRegister, onLogin }) {
-  const { values, handleChange, errors, isValid, resetForm } = useFormWithValidation({});
+  const { values, handleChange, errors, isValid, resetForm } = useFormWithValidation(
+    {
+      email: '',
+      password: '',
+    }
+  );
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -39,7 +44,7 @@ function CredentialsForm({ type, onRegister, onLogin }) {
                 maxLength='30'
                 pattern='^[A-Za-zА-Яа-я -]+$'
                 required
-                value={values.name}
+                value={values.name || ''}
                 onChange={handleChange}
               />
               <span className='credentials__input-error'>{errors.name}</span>
@@ -55,7 +60,7 @@ function CredentialsForm({ type, onRegister, onLogin }) {
               minLength='2'
               maxLength='30'
               required
-              value={values.email}
+              value={values.email || ''}
               pattern='^[a-zA-Z0-9_.+]+(?<!^[0-9]*)@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$'
               onChange={handleChange}
             />
@@ -71,7 +76,7 @@ function CredentialsForm({ type, onRegister, onLogin }) {
               minLength='8'
               maxLength='30'
               required
-              value={values.password}
+              value={values.password || ''}
               onChange={handleChange}
             />
             <span className='credentials__input-error'>{errors.password}</span>
