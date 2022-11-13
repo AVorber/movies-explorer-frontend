@@ -5,7 +5,7 @@ import { useFormWithValidation } from '../../utils/FormValidation';
 import './CredentialsForm.css';
 
 function CredentialsForm({ type, onRegister, onLogin }) {
-  const { values, handleChange, errors, isValid, resetForm } = useFormWithValidation(
+  const { values, handleChange, errors, isValid } = useFormWithValidation(
     {
       email: '',
       password: '',
@@ -19,7 +19,6 @@ function CredentialsForm({ type, onRegister, onLogin }) {
     } else {
       onLogin(values);
     }
-    resetForm();
   }
 
   return (
