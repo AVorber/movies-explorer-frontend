@@ -105,8 +105,7 @@ function App() {
       })
       .catch(err => {
         alert(err);
-        localStorage.removeItem('jwt');
-        history.push('/signup');
+        handleSignOut();
       });
   }
 
