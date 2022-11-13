@@ -94,7 +94,7 @@ function App() {
     setMovies([]);
     setFilteredMovies([]);
     setSavedMovies([]);
-    history.push('/signin');
+    history.push('/');
   }
 
   function getUserInfo(token) {

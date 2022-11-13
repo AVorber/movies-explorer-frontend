@@ -28,6 +28,7 @@ function Profile({ onSignOut, onSubmit }) {
   function handleSubmit(e) {
     e.preventDefault();
     onSubmit(values);
+    setIsValid(false);
   }
 
   return (
