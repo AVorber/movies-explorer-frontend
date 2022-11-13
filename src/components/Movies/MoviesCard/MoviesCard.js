@@ -1,35 +1,87 @@
 import React, { useState } from 'react';
-import movie from '../../../images/movie.svg';
+import {useLocation} from 'react-router-dom';
 import './MoviesCard.css';
 
-function MoviesCard({ list_type }) {
-  const [like, setLike] = useState(false);
-  const likeClass = `card__button ${like ? 'card__button_type_like-active' : 'card__button_type_like'}`;
+function MoviesCard({ movie, savedMovies, onMovieLike, onMovieDelete }) {
+  const location = useLocation();
+  const [isLiked, setIsLiked] = useState(false);
+  const likeClass = `card__button ${isLiked ? 'card__button_type_like-active' : 'card__button_type_like'}`;
+  const savedMovie = savedMovies?.find(item => item.movieId === movie.id);
 
-  function handleLike() {
-    setLike(!like);
+  const setSavedMovie = React.useCallback(() => {
+    if (savedMovie) {
+      setIsLiked(true);
+    } else {
+      setIsLiked(false);
+    }
+  }, [movie.id, savedMovies]);
+
+  React.useEffect(() => {
+    setSavedMovie();
+  }, [setSavedMovie]);
+
+  function handleLikeClick() {
+    const savedMovie = {
+      country: movie.country || '',
+      director: movie.director || '',
+      duration: movie.duration || 0,
+      year: movie.year || '',
+      description: movie.description || '',
+      image: `https://api.nomoreparties.co${movie.image?.url}` || '',
+      trailerLink: movie.trailerLink || '',
+      thumbnail: `https://api.nomoreparties.co${movie.image?.formats?.thumbnail?.url}` || '',
+      movieId: movie.id,
+      nameRU: movie.nameRU || '',
+      nameEN: movie.nameEN || '',
+    };
+    onMovieLike(savedMovie);
+    setIsLiked(!isLiked);
+  }
+
+  function handleDislikeClick() {
+    onMovieDelete(savedMovie._id);
+    setIsLiked(!isLiked);
+  }
+
+  function handleDeleteMovieClick() {
+    onMovieDelete(movie._id);
   }
 
   return (
     <article className='card'>
-      <img className='card__image' alt='Фильм' src={movie} />
+      <a
+        className='card__trailer-link'
+        href={movie.trailerLink}
+        target='_blank'
+        rel='noreferrer'
+      >
+        <img
+          className='card__image'
+          alt={movie.nameRU}
+          src={location.pathname === '/movies' ? `https://api.nomoreparties.co${movie.image.url}` : movie.image}
+        />
+      </a>
       <div className='card__info'>
-        <h3 className='card__title'>В погоне за Бенкси</h3>
-        { list_type === 'saved-movies' ? (
+        <h3 className='card__title'>{movie.nameRU}</h3>
+        { location.pathname === '/saved-movies' ? (
           <button
             className='card__button card__button_type_delete'
-            aria-label='Лайк'
-            type='button'>
+            aria-label='Удалить фильм'
+            type='button'
+            onClick={handleDeleteMovieClick}
+          >
           </button>
         ) : (
           <button
             className={likeClass}
             aria-label='Лайк'
-            type='button'>
+            type='button'
+            onClick={isLiked ? handleDislikeClick : handleLikeClick}
+          >
           </button>
         )}
       </div>
-      <span className='card__duration'>1ч 42м</span>
+      <span className='card__duration'>{movie.duration} мин</span>
     </article>
   );
 }

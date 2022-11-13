@@ -5,3 +5,5 @@ function Preloader() {
     <div className='loader'></div>
   );
 }
+
+export default Preloader;

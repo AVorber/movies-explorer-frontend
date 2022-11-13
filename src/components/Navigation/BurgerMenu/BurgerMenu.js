@@ -1,8 +1,9 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import {NavLink, useLocation } from 'react-router-dom';
 import './BurgerMenu.css';
 
 function BurgerMenu(props) {
+  const location = useLocation();
   function handleCloseMenu() {
     props.setIsOpen(false);
   }
@@ -12,15 +13,34 @@ function BurgerMenu(props) {
       <div className='burger-menu__container'>
         <button className='burger-menu__close-button' onClick={handleCloseMenu} />
         <nav className='burger-menu__links'>
-          <NavLink className='burger-menu__link' to='/'>
+          <NavLink
+            to='/'
+            className={
+                location.pathname === '/'
+                  ? 'burger-menu__link burger-menu__link_active'
+                  : 'burger-menu__link'
+              }
+          >
             Главная
           </NavLink>
           <NavLink
-            className='burger-menu__link burger-menu__link_active'
-            to='/movies'>
+            to='/movies'
+            className={
+                location.pathname === '/movies'
+                  ? 'burger-menu__link burger-menu__link_active'
+                  : 'burger-menu__link'
+              }
+          >
             Фильмы
           </NavLink>
-          <NavLink className='burger-menu__link' to='/saved-movies'>
+          <NavLink
+            to='/saved-movies'
+            className={
+              location.pathname === '/saved-movies'
+                ? 'burger-menu__link burger-menu__link_active'
+                : 'burger-menu__link'
+            }
+          >
             Сохранённые фильмы
           </NavLink>
         </nav>

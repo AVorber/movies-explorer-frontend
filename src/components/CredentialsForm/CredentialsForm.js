@@ -1,27 +1,24 @@
 import React from 'react';
 import logo from '../../images/credentials-form-logo.svg';
 import { Link } from 'react-router-dom';
+import { useFormWithValidation } from '../../utils/FormValidation';
 import './CredentialsForm.css';
 
-function CredentialsForm({ type }) {
-  const [name, setName] = React.useState('');
-  const [email, setEmail] = React.useState('');
-  const [password, setPassword] = React.useState('');
-
-  function handleNameChange(e) {
-    setName(e.target.value);
-  }
-
-  function handleEmailChange(e) {
-    setEmail(e.target.value);
-  }
-
-  function handlePasswordChange(e) {
-    setPassword(e.target.value);
-  }
+function CredentialsForm({ type, onRegister, onLogin }) {
+  const { values, handleChange, errors, isValid } = useFormWithValidation(
+    {
+      email: '',
+      password: '',
+    }
+  );
 
   function handleSubmit(e) {
     e.preventDefault();
+    if (type === 'register') {
+      onRegister(values);
+    } else {
+      onLogin(values);
+    }
   }
 
   return (
@@ -40,12 +37,16 @@ function CredentialsForm({ type }) {
               <input
                 className='credentials__input'
                 id='name'
+                name='name'
+                type='text'
                 minLength='2'
                 maxLength='30'
+                pattern='^[A-Za-zА-Яа-я -]+$'
                 required
-                value={name}
-                onChange={handleNameChange}
+                value={values.name || ''}
+                onChange={handleChange}
               />
+              <span className='credentials__input-error'>{errors.name}</span>
             </fieldset>
           ) : null}
           <fieldset className='credentials__input-container'>
@@ -53,31 +54,37 @@ function CredentialsForm({ type }) {
             <input
               className='credentials__input'
               id='email'
+              name='email'
               type='email'
               minLength='2'
               maxLength='30'
               required
-              value={email}
-              onChange={handleEmailChange}
+              value={values.email || ''}
+              pattern='^[a-zA-Z0-9_.+]+(?<!^[0-9]*)@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$'
+              onChange={handleChange}
             />
+            <span className='credentials__input-error'>{errors.email}</span>
           </fieldset>
           <fieldset className='credentials__input-container'>
             <label className='credentials__input-label' htmlFor='password'>Пароль</label>
             <input
               className='credentials__input'
               id='password'
+              name='password'
               type='password'
-              minLength='2'
+              minLength='8'
               maxLength='30'
               required
-              value={password}
-              onChange={handlePasswordChange}
+              value={values.password || ''}
+              onChange={handleChange}
             />
+            <span className='credentials__input-error'>{errors.password}</span>
           </fieldset>
         </div>
         <button
           type='submit'
-          className='credentials__form-submit'
+          className={`credentials__form-submit ${!isValid ? 'credentials__form-submit_disabled' : ''}`}
+          disabled={!isValid}
         >
           {type === 'register' ? 'Зарегистрироваться' : 'Войти'}
         </button>
@@ -89,7 +96,7 @@ function CredentialsForm({ type }) {
             : 'Ещё не зарегистрированы?'}
         </p>
         <Link
-          to={type === 'register' ? '/sign-in' : '/sign-up'}
+          to={type === 'register' ? '/signin' : '/signup'}
           className='credentials__nav-link'
         >
           {type === 'register' ? 'Войти' : 'Регистрация'}

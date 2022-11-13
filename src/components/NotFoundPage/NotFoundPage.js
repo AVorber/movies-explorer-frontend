@@ -1,14 +1,14 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import './NotFoundPage.css';
 
 function NotFoundPage() {
-  const history = useNavigate();
+  let history = useHistory();
   return (
     <div className='not-found-page'>
       <h2 className='not-found-page__title'>404</h2>
       <p className='not-found-page__description'>Страница не найдена</p>
-      <button type='button' className='not-found-page__button' onClick={() => history(-1)}>Назад</button>
+      <button type='button' className='not-found-page__button' onClick={history.goBack}>Назад</button>
     </div>
   );
 }
